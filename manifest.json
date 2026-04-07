@@ -1,12 +1,10 @@
 {
   "id": "svg-zoom-viewer",
   "name": "SVG Zoom Viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minAppVersion": "1.6.0",
-  "description": "Double-click an SVG or image to open a dedicated zoomable Obsidian view.",
+  "description": "Double-click an SVG or image to open a dedicated zoomable view.",
   "author": "EnakZzz",
   "authorUrl": "https://github.com/EnakZzz",
-  "isDesktopOnly": true,
-  "js": "main.js",
-  "css": "styles.css"
+  "isDesktopOnly": true
 }
