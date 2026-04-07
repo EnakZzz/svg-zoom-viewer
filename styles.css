@@ -1,0 +1,48 @@
+.workspace-leaf-content[data-type="svg-zoom-viewer-view"] .view-content {
+  padding: 0;
+}
+
+.svg-zoom-viewer-pane {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--background-primary);
+}
+
+.svg-zoom-viewer-viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+
+.svg-zoom-viewer-stage {
+  transform-origin: center center;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-zoom-viewer-viewport.is-panning {
+  cursor: grabbing;
+}
+
+.svg-zoom-viewer-img {
+  max-width: none;
+  max-height: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.svg-zoom-viewer-frame {
+  width: min(90vw, 1600px);
+  height: min(90vh, 1200px);
+  border: 0;
+  background: white;
+  pointer-events: none;
+}
