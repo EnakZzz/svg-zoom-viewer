@@ -1,12 +1,7 @@
 const { Plugin, ItemView } = require('obsidian');
 
 const VIEW_TYPE = 'svg-zoom-viewer-view';
-const LOG_PREFIX = '[svg-zoom-viewer]';
 const IMAGE_EXTENSIONS = ['.svg', '.png', '.jpg', '.jpeg', '.webp', '.gif'];
-
-function log(...args) {
-    console.debug(LOG_PREFIX, ...args);
-}
 
 function isSupportedImage(src) {
     if (!src) {
@@ -98,8 +93,6 @@ class SvgZoomViewerView extends ItemView {
         this.imageTitle = state?.title || 'Image Viewer';
         this.resetTransform();
         this.renderMedia();
-
-        log('view state updated', { title: this.imageTitle, src: this.imageSrc });
     }
 
     getState() {
@@ -179,7 +172,6 @@ class SvgZoomViewerView extends ItemView {
             frame.setAttribute('sandbox', 'allow-same-origin');
             this.stageEl.appendChild(frame);
             this.mediaEl = frame;
-            log('render media as iframe', this.imageSrc);
             return;
         }
 
@@ -189,13 +181,11 @@ class SvgZoomViewerView extends ItemView {
         img.className = 'svg-zoom-viewer-img';
         this.stageEl.appendChild(img);
         this.mediaEl = img;
-        log('render media as img', this.imageSrc);
     }
 }
 
 class SvgZoomViewerPlugin extends Plugin {
     async onload() {
-        log('plugin load');
         this.registerView(VIEW_TYPE, (leaf) => new SvgZoomViewerView(leaf));
 
         this.dblclickHandler = async (event) => {
@@ -206,7 +196,6 @@ class SvgZoomViewerPlugin extends Plugin {
 
             const src = image.getAttribute('src') || image.currentSrc || '';
             if (!isSupportedImage(src)) {
-                log('double click ignored, unsupported src', src);
                 return;
             }
 
@@ -214,16 +203,13 @@ class SvgZoomViewerPlugin extends Plugin {
             event.stopPropagation();
 
             const title = image.getAttribute('alt') || image.getAttribute('src') || 'Image Viewer';
-            log('double click hit image', { title, src });
             await this.openImageView(src, title);
         };
 
         document.addEventListener('dblclick', this.dblclickHandler, true);
-        log('dblclick listener registered');
     }
 
     onunload() {
-        log('plugin unload');
         document.removeEventListener('dblclick', this.dblclickHandler, true);
         this.app.workspace.detachLeavesOfType(VIEW_TYPE);
     }

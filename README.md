@@ -1,42 +1,29 @@
 # SVG Zoom Viewer
 
-An Obsidian desktop plugin that opens SVG and common image embeds in a dedicated view with:
+SVG Zoom Viewer is an Obsidian desktop plugin that opens SVG and common image embeds in a dedicated zoomable view.
 
-- double-click to open
-- wheel zoom
-- drag to pan
-- double-click inside the viewer to reset transform
+## Features
 
-## Current behavior
+- Double-click an embedded image in reading view to open it in a dedicated leaf.
+- Zoom with the mouse wheel.
+- Drag to pan.
+- Double-click inside the viewer to reset the transform.
+- Supports `svg`, `png`, `jpg`, `jpeg`, `webp`, and `gif`.
 
-- Double-click an image in reading view.
-- Supported formats: `svg`, `png`, `jpg`, `jpeg`, `webp`, `gif`
-- The plugin opens a new leaf with a dedicated image viewer.
-- SVG currently uses an `iframe` path so it stays closer to vector rendering than a normal image tag.
+SVG files are rendered in an `iframe` so they stay closer to native vector rendering than a regular `<img>` tag.
 
-## Install locally
+## Installation
 
-1. Copy `manifest.json`, `main.js`, and `styles.css` into:
-   `.obsidian/plugins/svg-zoom-viewer/`
-2. In Obsidian, open **Settings -> Community plugins**
-3. Reload plugins or restart Obsidian
-4. Enable `SVG Zoom Viewer`
+### Community plugins
 
-## Debugging
+After this plugin is approved in the Obsidian community plugin directory, install it from **Settings -> Community plugins -> Browse**.
 
-Open Obsidian developer tools and check the console for logs prefixed with:
+### Manual installation
 
-```text
-[svg-zoom-viewer]
-```
-
-Important logs:
-
-- `plugin load`
-- `dblclick listener registered`
-- `double click hit image`
-- `render media as iframe`
-- `render media as img`
+1. Download `manifest.json`, `main.js`, and `styles.css` from the matching GitHub release.
+2. Copy them into `.obsidian/plugins/svg-zoom-viewer/` inside your vault.
+3. Reload Obsidian.
+4. Enable `SVG Zoom Viewer` in **Settings -> Community plugins**.
 
 ## Repository layout
 
@@ -45,12 +32,20 @@ svg-zoom-viewer/
   manifest.json
   main.js
   styles.css
+  versions.json
   README.md
   LICENSE
 ```
 
-## Known limitations
+## Privacy and disclosures
 
-- This is a minimal runtime-only plugin with no build pipeline yet.
-- SVG rendering quality still depends on how Obsidian/Electron serves the source URL.
-- If the iframe path still looks rasterized in some cases, the next iteration should inline SVG text directly into the viewer instead of loading by URL.
+- Desktop only.
+- No network requests.
+- No telemetry, tracking, analytics, or ads.
+- No external service account required.
+- No external file access outside what Obsidian already loads for embedded images in your vault.
+
+## Notes
+
+- SVG rendering quality still depends on how Obsidian and Electron serve the source URL.
+- If some SVGs still look rasterized, a future version can switch to inlining SVG markup instead of loading by URL.
